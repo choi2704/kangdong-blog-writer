@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>강동자바라 블로그 작성기</title>
+  <style>
+    :root{--blue:#135bb5;--deep:#0b3470;--light:#eef5ff;--line:#d8e2ef;--text:#172033;--muted:#637087;--ok:#0d8a5f;--warn:#ad6800}
+    *{box-sizing:border-box}body{margin:0;font-family:"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;background:#f4f7fb;color:var(--text)}
+    .top{background:linear-gradient(135deg,var(--deep),var(--blue));color:#fff;padding:28px 22px}.top-inner{max-width:1420px;margin:auto}.top h1{margin:0 0 8px;font-size:28px}.top p{margin:0;opacity:.88}
+    main{max-width:1420px;margin:22px auto;padding:0 18px 50px;display:grid;grid-template-columns:minmax(360px,520px) minmax(0,1fr);gap:20px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 25px rgba(22,48,86,.07);overflow:hidden}.card-head{padding:18px 20px;border-bottom:1px solid var(--line);font-weight:800;font-size:18px}.card-body{padding:20px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin-bottom:14px}.field label{display:block;font-weight:700;font-size:14px;margin:0 0 7px}.field small{color:var(--muted)}
+    input,select,textarea{width:100%;border:1px solid #cbd7e6;border-radius:10px;padding:11px 12px;font:inherit;background:#fff;color:var(--text)}textarea{min-height:94px;resize:vertical}input:focus,select:focus,textarea:focus{outline:3px solid rgba(19,91,181,.12);border-color:var(--blue)}
+    .drop{border:2px dashed #aabbd1;border-radius:14px;padding:18px;text-align:center;background:#f9fbfe;cursor:pointer}.drop.drag{background:var(--light);border-color:var(--blue)}.drop strong{display:block;margin-bottom:5px}.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.thumb{position:relative;aspect-ratio:1;border-radius:9px;overflow:hidden;border:1px solid var(--line)}.thumb img{width:100%;height:100%;object-fit:cover}.thumb button{position:absolute;right:3px;top:3px;border:0;background:rgba(0,0,0,.65);color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer}
+    .actions{display:flex;gap:9px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff;flex:1}.secondary{background:#eaf1fb;color:var(--deep)}.ghost{background:#f4f6f9;color:#33415a}.btn:disabled{opacity:.5;cursor:not-allowed}
+    .status{margin-top:12px;padding:11px 13px;border-radius:10px;background:#f2f6fb;color:var(--muted);display:none}.status.show{display:block}.status.error{background:#fff0f0;color:#a61b1b}.status.ok{background:#ecfbf5;color:var(--ok)}
+    .empty{padding:60px 20px;text-align:center;color:var(--muted)}.result{display:none}.result.show{display:block}.tabs{display:flex;gap:6px;flex-wrap:wrap;padding:12px 14px;border-bottom:1px solid var(--line);background:#f8fafc}.tab{border:0;background:#e9eef5;padding:8px 12px;border-radius:20px;font-weight:700;cursor:pointer}.tab.active{background:var(--blue);color:#fff}.panel{display:none;padding:20px}.panel.active{display:block}
+    .copy-row{display:flex;justify-content:flex-end;margin-bottom:10px}.output{white-space:pre-wrap;line-height:1.75;border:1px solid var(--line);background:#fbfcfe;border-radius:12px;padding:17px;max-height:68vh;overflow:auto}.title-item,.faq-item,.caption-item{padding:12px 13px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:#fbfcfe}.keyword{display:inline-block;background:var(--light);color:var(--deep);padding:6px 9px;border-radius:20px;margin:3px;font-size:13px}.warning{background:#fff8e8;border:1px solid #f3d18a;color:#795000;padding:12px;border-radius:10px;margin-top:12px}
+    @media(max-width:980px){main{grid-template-columns:1fr}.output{max-height:none}.grid2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="top-inner"><h1>강동자바라 블로그 작성기</h1><p>사진과 간단한 작업 메모로 SEO·GEO에 맞는 네이버 블로그 원고를 생성합니다.</p></div></header>
+  <main>
+    <section class="card">
+      <div class="card-head">작업 정보 입력</div>
+      <div class="card-body">
+        <div class="grid2">
+          <div class="field"><label>제품 종류 *</label><select id="product"><option value="">선택</option><option>스텐 자바라 대문</option><option>알루미늄 방범창</option><option>스테인리스 방범창</option><option>안전난간대</option><option>폴리카보네이트 차양</option><option>캐노픽스</option><option>안전망사다리</option><option>엘보사다리</option><option>볼라드</option><option>폴딩도어</option><option>대리석 문주</option><option>기타 맞춤 제작</option></select></div>
+          <div class="field"><label>글 유형</label><select id="articleType"><option>시공사례</option><option>제작과정</option><option>제품소개</option><option>주문방법</option><option>정보형 콘텐츠</option></select></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>작업 지역</label><input id="region" placeholder="예: 경기도 광주시 곤지암" /></div>
+          <div class="field"><label>재질</label><input id="material" placeholder="예: SUS304, 알루미늄" /></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>규격</label><input id="size" placeholder="예: 가로 1800 × 세로 1200mm" /></div>
+          <div class="field"><label>주요 고객</label><input id="target" placeholder="예: 건설 현장 소장, 일반 소비자" /></div>
+        </div>
+        <div class="field"><label>작업 메모 *</label><textarea id="notes" placeholder="무엇을 제작·설치했는지, 현장 상황, 고객 요청사항을 간단히 적어주세요."></textarea></div>
+        <div class="field"><label>강조할 장점</label><textarea id="highlights" placeholder="예: 자체 레이저 절단, 맞춤 제작, 녹에 강한 재질, 빠른 출고"></textarea></div>
+        <div class="grid2">
+          <div class="field"><label>말투</label><select id="tone"><option>전문적이고 친절한 말투</option><option>현장 경험이 느껴지는 말투</option><option>일반 고객이 이해하기 쉬운 말투</option><option>건설·금속업체 대상 전문적인 말투</option></select></div>
+          <div class="field"><label>글 길이</label><select id="length"><option>보통 (약 1,500~2,000자)</option><option>짧게 (약 1,000자)</option><option>길게 (약 2,500~3,000자)</option></select></div>
+        </div>
+        <div class="field"><label>상담 안내</label><input id="contact" value="제품 규격과 현장 사진을 보내주시면 맞춤 제작 상담을 도와드립니다." /></div>
+        <div class="field"><label>현장 사진 <small>(최대 8장, 장당 6MB)</small></label><div class="drop" id="drop"><strong>사진을 끌어놓거나 클릭해 업로드</strong><span>JPG, PNG, WEBP</span><input id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden /></div><div class="thumbs" id="thumbs"></div></div>
+        <div class="actions"><button class="btn primary" id="generate">블로그 글 생성</button><button class="btn ghost" id="reset">초기화</button></div>
+        <div class="status" id="status"></div>
+      </div>
+    </section>
+    <section class="card">
+      <div class="card-head">생성 결과</div>
+      <div class="empty" id="empty">왼쪽에 정보를 입력한 뒤<br><b>블로그 글 생성</b>을 눌러주세요.</div>
+      <div class="result" id="result">
+        <div class="tabs">
+          <button class="tab active" data-tab="body">전체 본문</button><button class="tab" data-tab="titles">제목</button><button class="tab" data-tab="photos">사진 설명</button><button class="tab" data-tab="faq">FAQ</button><button class="tab" data-tab="tags">키워드·해시태그</button><button class="tab" data-tab="short">짧은 홍보글</button>
+        </div>
+        <div class="panel active" id="panel-body"><div class="copy-row"><button class="btn secondary" data-copy="body">전체 본문 복사</button></div><div class="output" id="body"></div></div>
+        <div class="panel" id="panel-titles"><div class="copy-row"><button class="btn secondary" data-copy="titles">제목 전체 복사</button></div><div id="titles"></div></div>
+        <div class="panel" id="panel-photos"><div class="copy-row"><button class="btn secondary" data-copy="photos">사진 설명 복사</button></div><div id="photos"></div></div>
+        <div class="panel" id="panel-faq"><div class="copy-row"><button class="btn secondary" data-copy="faq">FAQ 복사</button></div><div id="faq"></div></div>
+        <div class="panel" id="panel-tags"><div class="copy-row"><button class="btn secondary" data-copy="tags">키워드·해시태그 복사</button></div><div id="keywords"></div><div class="output" id="summary" style="margin-top:14px"></div><div id="checks"></div></div>
+        <div class="panel" id="panel-short"><div class="copy-row"><button class="btn secondary" data-copy="short">짧은 글 복사</button></div><div class="output" id="short"></div></div>
+      </div>
+    </section>
+  </main>
+<script>
+  const $=id=>document.getElementById(id); let images=[]; let data=null;
+  const drop=$('drop'), files=$('files');
+  drop.onclick=()=>files.click(); drop.ondragover=e=>{e.preventDefault();drop.classList.add('drag')}; drop.ondragleave=()=>drop.classList.remove('drag'); drop.ondrop=e=>{e.preventDefault();drop.classList.remove('drag');addFiles(e.dataTransfer.files)}; files.onchange=()=>addFiles(files.files);
+  function addFiles(list){[...list].forEach(file=>{if(images.length>=8)return;if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>6*1024*1024)return;const r=new FileReader();r.onload=()=>{images.push({name:file.name,dataUrl:r.result});renderThumbs()};r.readAsDataURL(file)});files.value=''}
+  function renderThumbs(){$('thumbs').innerHTML=images.map((x,i)=>`<div class="thumb"><img src="${x.dataUrl}"><button onclick="removeImage(${i})">×</button></div>`).join('')}; window.removeImage=i=>{images.splice(i,1);renderThumbs()};
+  function status(msg,type=''){const el=$('status');el.textContent=msg;el.className='status show '+type} function hideStatus(){$('status').className='status'}
+  $('generate').onclick=async()=>{const product=$('product').value,notes=$('notes').value.trim();if(!product||!notes){status('제품 종류와 작업 메모를 입력해 주세요.','error');return}const btn=$('generate');btn.disabled=true;btn.textContent='글 생성 중...';status('사진과 작업 내용을 분석하고 있습니다. 잠시 기다려 주세요.');try{const res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product,articleType:$('articleType').value,region:$('region').value,material:$('material').value,size:$('size').value,target:$('target').value,notes,highlights:$('highlights').value,tone:$('tone').value,length:$('length').value,contact:$('contact').value,images})});const json=await res.json();if(!res.ok)throw new Error(json.error||'생성 실패');data=json.result;renderResult();status('블로그 원고가 생성되었습니다.','ok')}catch(e){status(e.message,'error')}finally{btn.disabled=false;btn.textContent='블로그 글 생성'}};
+  function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+  function renderResult(){$('empty').style.display='none';$('result').classList.add('show');$('body').textContent=data.body||'';$('titles').innerHTML=(data.titles||[]).map((x,i)=>`<div class="title-item"><b>${i+1}.</b> ${esc(x)}</div>`).join('');$('photos').innerHTML=(data.photoCaptions||[]).map((x,i)=>`<div class="caption-item"><b>사진 ${i+1}</b><br>${esc(x)}</div>`).join('')||'<div class="warning">사진 설명이 없습니다.</div>';$('faq').innerHTML=(data.faq||[]).map(x=>`<div class="faq-item"><b>Q. ${esc(x.question)}</b><br><br>A. ${esc(x.answer)}</div>`).join('');$('keywords').innerHTML=`<div><b>핵심 키워드</b><br><span class="keyword">${esc(data.primaryKeyword||'')}</span></div><br><div><b>연관 키워드</b><br>${(data.relatedKeywords||[]).map(x=>`<span class="keyword">${esc(x)}</span>`).join('')}</div><br><div><b>해시태그</b><br>${(data.hashtags||[]).map(x=>`<span class="keyword">${esc(x)}</span>`).join('')}</div>`;$('summary').textContent='요약\n\n'+(data.summary||'');$('checks').innerHTML=(data.qualityChecks||[]).length?`<div class="warning"><b>게시 전 확인</b><br>${data.qualityChecks.map(x=>'• '+esc(x)).join('<br>')}</div>`:'';$('short').textContent=data.shortPost||''}
+  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('panel-'+b.dataset.tab).classList.add('active')});
+  const texts={body:()=>data?.body||'',titles:()=> (data?.titles||[]).map((x,i)=>`${i+1}. ${x}`).join('\n'),photos:()=> (data?.photoCaptions||[]).map((x,i)=>`사진 ${i+1}. ${x}`).join('\n\n'),faq:()=> (data?.faq||[]).map(x=>`Q. ${x.question}\nA. ${x.answer}`).join('\n\n'),tags:()=>`핵심 키워드: ${data?.primaryKeyword||''}\n연관 키워드: ${(data?.relatedKeywords||[]).join(', ')}\n해시태그: ${(data?.hashtags||[]).join(' ')}`,short:()=>data?.shortPost||''};
+  document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{await navigator.clipboard.writeText(texts[b.dataset.copy]());const old=b.textContent;b.textContent='복사 완료';setTimeout(()=>b.textContent=old,1200)});
+  $('reset').onclick=()=>{if(!confirm('입력 내용을 모두 지울까요?'))return;document.querySelectorAll('input:not([type=file]),textarea').forEach(x=>x.value='');$('contact').value='제품 규격과 현장 사진을 보내주시면 맞춤 제작 상담을 도와드립니다.';$('product').value='';images=[];data=null;renderThumbs();$('result').classList.remove('show');$('empty').style.display='block';hideStatus()};
+</script>
+</body>
+</html>

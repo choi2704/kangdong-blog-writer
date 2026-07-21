@@ -1,0 +1,16 @@
+{
+  "name": "kangdong-blog-writer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "openai": "^5.12.2"
+  },
+  "devDependencies": {
+    "vercel": "^44.5.0"
+  }
+}
