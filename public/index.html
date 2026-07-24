@@ -21,15 +21,16 @@
   </style>
 </head>
 <body>
-  <header class="top"><div class="top-inner"><h1>강동자바라 블로그 작성기</h1><p>사진과 간단한 작업 메모로 SEO·GEO에 맞는 네이버 블로그 원고를 생성합니다.</p></div></header>
+  <header class="top"><div class="top-inner"><h1>강동자바라 블로그 작성기</h1><p>고객 질문과 실제 작업 정보를 바탕으로 SEO·AEO·GEO에 맞는 네이버 블로그 원고를 생성합니다.</p></div></header>
   <main>
     <section class="card">
       <div class="card-head">작업 정보 입력</div>
       <div class="card-body">
         <div class="grid2">
-          <div class="field"><label>제품 종류 *</label><select id="product"><option value="">선택</option><option>스텐 자바라 대문</option><option>알루미늄 방범창</option><option>스테인리스 방범창</option><option>안전난간대</option><option>폴리카보네이트 차양</option><option>캐노픽스</option><option>안전망사다리</option><option>엘보사다리</option><option>볼라드</option><option>폴딩도어</option><option>대리석 문주</option><option>기타 맞춤 제작</option></select></div>
-          <div class="field"><label>글 유형</label><select id="articleType"><option>시공사례</option><option>제작과정</option><option>제품소개</option><option>주문방법</option><option>정보형 콘텐츠</option></select></div>
+          <div class="field"><label>제품 종류 *</label><select id="product"><option value="">선택</option><option>스텐 자바라 대문</option><option>알루미늄 자바라</option><option>자바라 하우스</option><option>스테인리스 방범창</option><option>알루미늄 방범창</option><option>렉산·폴리카보네이트</option><option>캐노피·차양</option><option>캐노픽스</option><option>안전망사다리</option><option>엘보사다리</option><option>안전난간대</option><option>대리석 문주</option><option>폴딩도어</option><option>볼라드</option><option>기타 스텐 맞춤 제작</option></select></div>
+          <div class="field"><label>글 유형</label><select id="articleType"><option>고객 질문 답변형</option><option>제품 비교형</option><option>가격 계산형</option><option>실측 방법형</option><option>문제 해결형</option><option>FAQ 종합형</option><option>시공사례</option><option>제작과정</option><option>제품소개</option><option>주문방법</option><option>정보형 콘텐츠</option></select></div>
         </div>
+        <div class="field"><label>고객이 실제로 궁금해하는 질문 *</label><textarea id="customerQuestion" placeholder="예: 스텐 자바라 대문 가격은 어떻게 계산하나요? 경사진 바닥에도 설치할 수 있나요?"></textarea></div>
         <div class="grid2">
           <div class="field"><label>작업 지역</label><input id="region" placeholder="예: 경기도 광주시 곤지암" /></div>
           <div class="field"><label>재질</label><input id="material" placeholder="예: SUS304, 알루미늄" /></div>
@@ -40,6 +41,15 @@
         </div>
         <div class="field"><label>작업 메모 *</label><textarea id="notes" placeholder="무엇을 제작·설치했는지, 현장 상황, 고객 요청사항을 간단히 적어주세요."></textarea></div>
         <div class="field"><label>강조할 장점</label><textarea id="highlights" placeholder="예: 자체 레이저 절단, 맞춤 제작, 녹에 강한 재질, 빠른 출고"></textarea></div>
+        <div class="field"><label>확정된 사실·조건 <small>(입력한 내용만 글에 사용)</small></label><textarea id="facts" placeholder="예: 최소 주문 3m / 제작기간 4~5일 / 전국 화물 착불 / SUS201·SUS304 선택 가능"></textarea></div>
+        <div class="grid2">
+          <div class="field"><label>가격·계산 기준</label><textarea id="pricing" placeholder="예: 1m 단가 × 길이 + 선택 옵션 비용"></textarea></div>
+          <div class="field"><label>옵션·선택 조건</label><textarea id="options" placeholder="예: 편개형·양개형, 우레탄바퀴, 레일바퀴"></textarea></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>주의사항·설치 조건</label><textarea id="cautions" placeholder="예: 경사 바닥은 좌·중·우 높이 측정 필요"></textarea></div>
+          <div class="field"><label>관련 링크</label><textarea id="links" placeholder="예: 견적 계산기 주소, 측정 방법 블로그 주소"></textarea></div>
+        </div>
         <div class="grid2">
           <div class="field"><label>말투</label><select id="tone"><option>전문적이고 친절한 말투</option><option>현장 경험이 느껴지는 말투</option><option>일반 고객이 이해하기 쉬운 말투</option><option>건설·금속업체 대상 전문적인 말투</option></select></div>
           <div class="field"><label>글 길이</label><select id="length"><option>보통 (약 1,500~2,000자)</option><option>짧게 (약 1,000자)</option><option>길게 (약 2,500~3,000자)</option></select></div>
@@ -73,7 +83,7 @@
   function addFiles(list){[...list].forEach(file=>{if(images.length>=8)return;if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>6*1024*1024)return;const r=new FileReader();r.onload=()=>{images.push({name:file.name,dataUrl:r.result});renderThumbs()};r.readAsDataURL(file)});files.value=''}
   function renderThumbs(){$('thumbs').innerHTML=images.map((x,i)=>`<div class="thumb"><img src="${x.dataUrl}"><button onclick="removeImage(${i})">×</button></div>`).join('')}; window.removeImage=i=>{images.splice(i,1);renderThumbs()};
   function status(msg,type=''){const el=$('status');el.textContent=msg;el.className='status show '+type} function hideStatus(){$('status').className='status'}
-  $('generate').onclick=async()=>{const product=$('product').value,notes=$('notes').value.trim();if(!product||!notes){status('제품 종류와 작업 메모를 입력해 주세요.','error');return}const btn=$('generate');btn.disabled=true;btn.textContent='글 생성 중...';status('사진과 작업 내용을 분석하고 있습니다. 잠시 기다려 주세요.');try{const res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product,articleType:$('articleType').value,region:$('region').value,material:$('material').value,size:$('size').value,target:$('target').value,notes,highlights:$('highlights').value,tone:$('tone').value,length:$('length').value,contact:$('contact').value,images})});const json=await res.json();if(!res.ok)throw new Error(json.error||'생성 실패');data=json.result;renderResult();status('블로그 원고가 생성되었습니다.','ok')}catch(e){status(e.message,'error')}finally{btn.disabled=false;btn.textContent='블로그 글 생성'}};
+  $('generate').onclick=async()=>{const product=$('product').value,notes=$('notes').value.trim(),customerQuestion=$('customerQuestion').value.trim();if(!product||!notes||!customerQuestion){status('제품 종류, 고객 질문, 작업 메모를 입력해 주세요.','error');return}const btn=$('generate');btn.disabled=true;btn.textContent='글 생성 중...';status('질문과 작업 내용을 분석해 AEO형 원고를 작성하고 있습니다.');try{const res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product,customerQuestion,articleType:$('articleType').value,region:$('region').value,material:$('material').value,size:$('size').value,target:$('target').value,notes,highlights:$('highlights').value,facts:$('facts').value,pricing:$('pricing').value,options:$('options').value,cautions:$('cautions').value,links:$('links').value,tone:$('tone').value,length:$('length').value,contact:$('contact').value,images})});const json=await res.json();if(!res.ok)throw new Error(json.error||'생성 실패');data=json.result;renderResult();status('블로그 원고가 생성되었습니다.','ok')}catch(e){status(e.message,'error')}finally{btn.disabled=false;btn.textContent='블로그 글 생성'}};
   function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
   function renderResult(){$('empty').style.display='none';$('result').classList.add('show');$('body').textContent=data.body||'';$('titles').innerHTML=(data.titles||[]).map((x,i)=>`<div class="title-item"><b>${i+1}.</b> ${esc(x)}</div>`).join('');$('photos').innerHTML=(data.photoCaptions||[]).map((x,i)=>`<div class="caption-item"><b>사진 ${i+1}</b><br>${esc(x)}</div>`).join('')||'<div class="warning">사진 설명이 없습니다.</div>';$('faq').innerHTML=(data.faq||[]).map(x=>`<div class="faq-item"><b>Q. ${esc(x.question)}</b><br><br>A. ${esc(x.answer)}</div>`).join('');$('keywords').innerHTML=`<div><b>핵심 키워드</b><br><span class="keyword">${esc(data.primaryKeyword||'')}</span></div><br><div><b>연관 키워드</b><br>${(data.relatedKeywords||[]).map(x=>`<span class="keyword">${esc(x)}</span>`).join('')}</div><br><div><b>해시태그</b><br>${(data.hashtags||[]).map(x=>`<span class="keyword">${esc(x)}</span>`).join('')}</div>`;$('summary').textContent='요약\n\n'+(data.summary||'');$('checks').innerHTML=(data.qualityChecks||[]).length?`<div class="warning"><b>게시 전 확인</b><br>${data.qualityChecks.map(x=>'• '+esc(x)).join('<br>')}</div>`:'';$('short').textContent=data.shortPost||''}
   document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('panel-'+b.dataset.tab).classList.add('active')});
